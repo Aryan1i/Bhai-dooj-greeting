@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For Lalli ❤️</title>
+    <title>For Ishita ❤️</title>
     <style>
       * {
         margin: 0;
@@ -74,24 +74,43 @@
         left: 0;
         z-index: -1;
       }
+
+      #playBtn {
+        margin-top: 25px;
+        background: #ff3366;
+        border: none;
+        color: white;
+        padding: 12px 28px;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s;
+      }
+
+      #playBtn:hover {
+        transform: scale(1.05);
+        background: #ff6688;
+      }
     </style>
   </head>
   <body>
     <canvas id="confetti"></canvas>
 
     <div class="container">
-      <h1>Happy Bhai Dooj, Lalli ❤️</h1>
+      <h1>Happy Bhai Dooj, Ishita ❤️</h1>
       <h2>From Aryan 💫</h2>
       <p>You're the best sister anyone could ask for!<br />Wishing you endless happiness and love 💖</p>
       <div class="heart">💝</div>
+      <button id="playBtn">Play Music 🎵</button>
     </div>
 
-    <audio autoplay loop>
-      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9a9f0706f8.mp3" type="audio/mp3" />
+    <audio id="bg-music" loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3" />
     </audio>
 
     <script>
-      // Simple confetti animation
+      // Confetti animation
       const canvas = document.getElementById('confetti');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
@@ -127,6 +146,22 @@
       }
 
       setInterval(drawConfetti, 20);
+
+      // Play button logic with error handling
+      const playBtn = document.getElementById('playBtn');
+      const music = document.getElementById('bg-music');
+
+      playBtn.addEventListener('click', async () => {
+        try {
+          await music.play();
+          playBtn.textContent = "Music Playing 🎶";
+          playBtn.disabled = true;
+          playBtn.style.opacity = "0.8";
+        } catch (err) {
+          alert("Music playback blocked. Try clicking again or check your browser settings.");
+          console.error(err);
+        }
+      });
     </script>
   </body>
 </html>
